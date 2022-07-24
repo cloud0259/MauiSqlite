@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiSqlite.MainPage"
+             xmlns:local="clr-namespace:MauiSqlite.ViewModels"
+             xmlns:converter="clr-namespace:MauiSqlite.Converter"
+             xmlns:dtos="clr-namespace:MauiSqlite.Infrastructure.Dtos;assembly=MauiSqlite.Infrastructure"
+             x:DataType="local:BlogViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BlogConverter x:Key="blogConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <StackLayout Orientation="Vertical" Margin="10">
+            <Label Text="FirstName :"/>
+            <Editor x:Name="firstName" WidthRequest="100" HorizontalOptions="Start"/>
+
+            <Label Text="Name :"/>
+            <Editor x:Name="name" WidthRequest="100" HorizontalOptions="Start"/>
+
+            <Button Text="Ajouter" Command="{Binding AddBlogCommand}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource blogConverter}">
+                        <MultiBinding.Bindings>
+                        <Binding Source="{x:Reference firstName}" Path="Text"/>
+                        <Binding Source="{x:Reference name}" Path="Text"/>
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+
+            <ListView ItemsSource="{x:Binding Blogs}" HasUnevenRows="True" IsPullToRefreshEnabled="True" RefreshCommand="{Binding GetAllBlogCommand}" IsRefreshing="{Binding IsRefreshing}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="dtos:BlogDto" >
+                        <ViewCell>
+                            <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="FirstName :"/>
+                                <Label Text="{Binding FirstName}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Name :"/>
+                                <Label Text="{Binding Name}"/>
+                            </StackLayout>
+                        </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
