@@ -57,6 +57,7 @@ namespace MauiSqlite.Infrastructure.Repository
             {
                 blog.FirstName = input.FirstName;
                 blog.Name = input.Name;
+                blog.Description = input.Description;
 
                  _blogContext.Blogs.Update(blog);
                 await _blogContext.SaveChangesAsync();

@@ -11,11 +11,12 @@ namespace MauiSqlite.Converter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (values[0] != null && values[1] != null && values.Length == 2)
+            if (values[0] != null && values[1] != null && values[2] != null && values.Length == 3)
             {
                 string firstName = values[0].ToString();
                 string name = values[1].ToString();
-                return new CreateUpdateBlogDto { Name = name, FirstName = firstName };
+                string description = values[2].ToString();
+                return new CreateUpdateBlogDto { Name = name, FirstName = firstName, Description = description };
             }
             return null;
         }
