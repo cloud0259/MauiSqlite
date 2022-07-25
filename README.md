@@ -12,7 +12,7 @@ This sample implements SQLite with Entity Framework Core.
 
 the application is based on three projects:  
 * A Domain project for the models  
-* An Infrastructure project for database managemen
+* An Infrastructure project for database management
 * The MAUI project
 
 ## Usage/Examples
