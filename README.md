@@ -49,10 +49,10 @@ To change the path of the .db file, you must edit the **BlogContextFactory** fil
 * [.NET MAUI GitHub](https://github.com/dotnet/maui-samples#:~:text=.NET%20MAUI%20Website,NET%20MAUI%20GitHub)
 ## .Net Foundation
 
-Il existe de nombreux projets liés à .NET sur GitHub.
+There are many .NET related projects on GitHub.
 
-.NET home repo - liens vers des centaines de projets .NET, de Microsoft et de la communauté.
-Accueil ASP.NET Core - le meilleur endroit pour commencer à découvrir ASP.NET Core.
+* [.NET home repo](https://github.com/dotnet/maui-samples#:~:text=There%20are%20many,ASP.NET%20Core.) - links to hundreds of .NET projects, from Microsoft and the community.
+* [ASP.NET Core home](https://github.com/dotnet/maui-samples#:~:text=There%20are%20many,ASP.NET%20Core.) - the best place to start learning about ASP.NET Core.
 ## Authors
 
 - [@Cloud0259](https://www.github.com/cloud0259)
