@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MauiSqlite.Infrastructure.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20220725211522_Initial_Create")]
+    [Migration("20220725213619_Initial_Create")]
     partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace MauiSqlite.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Test")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

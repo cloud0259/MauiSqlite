@@ -16,7 +16,8 @@ namespace MauiSqlite.Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Test = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
