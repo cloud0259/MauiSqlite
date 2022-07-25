@@ -62,9 +62,12 @@ namespace MauiSqlite.ViewModels
             IsRefreshing = true;
             Blogs.Clear();
             var listBlog =  await _blogRepository.GetListBlogAsync();
-            foreach (var blog in listBlog)
+            if (listBlog != null)
             {
-                Blogs.Add(blog);
+                foreach (var blog in listBlog)
+                {
+                    Blogs.Add(blog);
+                }
             }
             IsRefreshing = false;
         }

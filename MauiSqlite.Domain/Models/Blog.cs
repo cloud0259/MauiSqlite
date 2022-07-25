@@ -12,5 +12,6 @@ namespace MauiSqlite.Domain.Models
         public string? Name { get; set; }
         public string? FirstName { get; set; }
         public string? Description { get; set; }
+        public string? Test { get; set; }
     }
 }

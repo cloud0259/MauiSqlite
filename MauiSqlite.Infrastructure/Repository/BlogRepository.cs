@@ -26,7 +26,7 @@ namespace MauiSqlite.Infrastructure.Repository
         {
             var blog = _mapper.Map<CreateUpdateBlogDto, Blog>(input);
             await _blogContext.Blogs.AddAsync(blog);
-            await _blogContext.SaveChangesAsync();
+            await _blogContext.SaveChangesAsync();              
         }
 
         public async Task DeleteBlogAsync(int id)
@@ -47,7 +47,11 @@ namespace MauiSqlite.Infrastructure.Repository
         public async Task<IEnumerable<BlogDto>> GetListBlogAsync()
         {
             var blogs = await _blogContext.Blogs.ToListAsync();
+            if (blogs == null)
+                return null;
             return _mapper.Map<List<Blog>, List<BlogDto>>(blogs);
+            
+            return null;
         }
 
         public async Task UpdateBlogAsync(int id, CreateUpdateBlogDto input)

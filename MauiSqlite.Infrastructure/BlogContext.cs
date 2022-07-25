@@ -11,10 +11,13 @@ namespace MauiSqlite.Infrastructure
     public class BlogContext : DbContext
     {
         public DbSet<Blog> Blogs { get; set; }
+
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
             SQLitePCL.Batteries_V2.Init();
-            this.Database.MigrateAsync();
+            this.Database.Migrate();
+            //Use to remove database
+            //this.Database.EnsureDeletedAsync();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

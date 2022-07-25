@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui;
+﻿
 using MauiSqlite.Infrastructure;
 using MauiSqlite.Infrastructure.Repository;
 using MauiSqlite.ViewModels;
@@ -18,7 +18,6 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-        builder.UseMauiApp<App>().UseMauiCommunityToolkit();
         builder.Services.AddAutoMapper(options =>
 		{
 			options.AddProfile(new AutoMapperProfile());

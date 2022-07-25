@@ -50,8 +50,6 @@
 
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-	  <PackageReference Include="CommunityToolkit.Maui" Version="1.2.0" />
-	  <PackageReference Include="CommunityToolkit.Maui.Core" Version="1.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>

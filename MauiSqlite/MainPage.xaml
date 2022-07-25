@@ -27,6 +27,7 @@
                         <MultiBinding.Bindings>
                             <Binding Source="{x:Reference firstName}" Path="Text"/>
                             <Binding Source="{x:Reference name}" Path="Text"/>
+                            <Binding Source="{x:Reference description}" Path="Text"/>
                         </MultiBinding.Bindings>
                     </MultiBinding>
                 </Button.CommandParameter>
