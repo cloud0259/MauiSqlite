@@ -21,7 +21,11 @@ Before the first launch, be sure to perform a **migration** in the Infrastructur
 
 ```
 dotnet ef migrations add Initial_Create
+dotnet ef database update
 ```
+*If you add a new migrations, make previous commands*
+
+**Don't use Database.EnsureCreated() for SQLite otherwise the migrations will no longer work**
 
 To change the path of the .db file, you must edit the **BlogContextFactory** file and in the **BlogContext**
 (An appsettings.json file is recommended)
