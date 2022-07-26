@@ -18,6 +18,7 @@ namespace MauiSqlite.ViewModels
         private bool _isExisting = false;
         public BlogDto Blog { get; set; }
         public ObservableCollection<BlogDto> Blogs { get; set; }
+
         public bool IsRefreshing
         {
             get => _isExisting;
@@ -41,6 +42,12 @@ namespace MauiSqlite.ViewModels
             await GetListBlogAsync();
         });
 
+        public ICommand DeleteBlogCommand => new Command(async (param) =>
+        {
+            var id = (int)param;
+            await DeleteBlogAsync(id);
+        });
+
         public BlogViewModel(IBlogRepository blogRepository)
         {
             _blogRepository = blogRepository;
@@ -50,6 +57,7 @@ namespace MauiSqlite.ViewModels
         public async Task CreateBlog(CreateUpdateBlogDto input)
         {
             await _blogRepository.CreateBlogAsync(input);
+            await GetListBlogAsync();
         }
 
         public async Task GetBlogAsync(int id)
@@ -72,10 +80,10 @@ namespace MauiSqlite.ViewModels
             IsRefreshing = false;
         }
 
-        public Task DeleteBlogAsync(int id)
+        public async Task DeleteBlogAsync(int id)
         {
-            _blogRepository.DeleteBlogAsync(id);
-            return Task.CompletedTask;
+            await _blogRepository.DeleteBlogAsync(id);
+            await GetListBlogAsync();
         }
 
         public async Task UpdateBlogAsync(int id, CreateUpdateBlogDto input)

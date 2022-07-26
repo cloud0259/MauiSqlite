@@ -19,9 +19,9 @@
             <Label Text="Name :"/>
             <Editor x:Name="name" WidthRequest="100" HorizontalOptions="Start"/>
             <Label Text="Description :"/>
-            <Editor x:Name="description" WidthRequest="100" HorizontalOptions="Start"/>
+            <Editor x:Name="description" WidthRequest="300" HeightRequest="100" HorizontalOptions="StartAndExpand"/>
 
-            <Button Text="Ajouter" Command="{Binding AddBlogCommand}">
+            <Button Text="Add blog" Command="{Binding AddBlogCommand}">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource blogConverter}">
                         <MultiBinding.Bindings>
@@ -33,22 +33,28 @@
                 </Button.CommandParameter>
             </Button>
 
-            <ListView ItemsSource="{x:Binding Blogs}" HasUnevenRows="True" IsPullToRefreshEnabled="True" RefreshCommand="{Binding GetAllBlogCommand}" IsRefreshing="{Binding IsRefreshing}" >
+            <ListView x:Name="listBlogs" ItemsSource="{x:Binding Blogs}" HasUnevenRows="True" IsPullToRefreshEnabled="True" RefreshCommand="{Binding GetAllBlogCommand}"
+                      IsRefreshing="{Binding IsRefreshing}" Margin="0,10,0,0" >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="dtos:BlogDto" >
                         <ViewCell>
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="FirstName :"/>
-                                    <Label Text="{Binding FirstName}"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Name :"/>
-                                    <Label Text="{Binding Name}"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Description :"/>
-                                    <Label Text="{Binding Description}"/>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="FirstName :"/>
+                                            <Label Text="{Binding FirstName}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Name :"/>
+                                            <Label Text="{Binding Name}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Description :"/>
+                                            <Label Text="{Binding Description}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <Button Text="Delete" HorizontalOptions="EndAndExpand" Command="{Binding Source={x:Reference listBlogs},Path=BindingContext.DeleteBlogCommand}" CommandParameter="{Binding Id}"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

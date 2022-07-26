@@ -31,9 +31,12 @@ namespace MauiSqlite.Infrastructure.Repository
 
         public async Task DeleteBlogAsync(int id)
         {
-            var blog = await  _blogContext.Blogs.Where(b => b.Id == id).FirstOrDefaultAsync();
-            if(blog != null)
+            var blog = await _blogContext.Blogs.Where(b => b.Id == id).FirstOrDefaultAsync();
+            if (blog != null)
+            {
                 _blogContext.Blogs.Remove(blog);
+                await _blogContext.SaveChangesAsync();
+            }
         }
 
         public async Task<BlogDto> GetBlogAsync(int id)
