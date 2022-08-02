@@ -22,7 +22,7 @@ namespace MauiSqlite.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var sqlitePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "blog.db");
+            var sqlitePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "blog.db");
             optionsBuilder.UseSqlite($"Data Source={sqlitePath}");
         }
     }
