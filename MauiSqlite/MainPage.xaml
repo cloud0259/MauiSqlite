@@ -32,36 +32,51 @@
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
+            <Grid Margin="20">
+                <CollectionView x:Name="listBlogs" ItemsSource="{x:Binding Blogs}" Margin="0,10,0,0" ItemsLayout="VerticalList"
+                                HorizontalOptions="FillAndExpand" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dtos:BlogDto" >
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete" 
+                                               BackgroundColor="LightPink"
+                                               Command="{Binding Source={x:Reference listBlogs},Path=BindingContext.DeleteBlogCommand}"
+                                               CommandParameter="{Binding Id}"/>
 
-            <ListView x:Name="listBlogs" ItemsSource="{x:Binding Blogs}" HasUnevenRows="True" IsPullToRefreshEnabled="True" RefreshCommand="{Binding GetAllBlogCommand}"
-                      IsRefreshing="{Binding IsRefreshing}" Margin="0,10,0,0" >
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="dtos:BlogDto" >
-                        <ViewCell>
-                            <StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="FirstName :"/>
-                                            <Label Text="{Binding FirstName}"/>
-                                        </StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="Name :"/>
-                                            <Label Text="{Binding Name}"/>
-                                        </StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="Description :"/>
-                                            <Label Text="{Binding Description}"/>
-                                        </StackLayout>
-                                    </StackLayout>
-                                    <Button Text="Delete" HorizontalOptions="EndAndExpand" Command="{Binding Source={x:Reference listBlogs},Path=BindingContext.DeleteBlogCommand}" CommandParameter="{Binding Id}"/>
-                                </StackLayout>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    </SwipeItems>
 
+                                </SwipeView.RightItems>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Grid.Row="0" Text="FirstName :"/>
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding FirstName}"/>
+
+                                    <Label Grid.Column="0" Grid.Row="1" Text="Name :"/>
+                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Name}"/>
+
+                                    <Label Grid.Column="0" Grid.Row="2" Text="Description :"/>
+                                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Description}"/>
+
+                                </Grid>
+
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
         </StackLayout>
     </ScrollView>
 
