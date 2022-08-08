@@ -38,16 +38,16 @@ jobs:
         run: dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore MauiSqlite/MauiSqlite/MauiSqlite.csproj
+        run: dotnet restore /MauiSqlite/MauiSqlite/MauiSqlite.csproj
 
       - name: Build MAUI Android
-        run: dotnet publish MauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-android --no-restore
+        run: dotnet publish /MauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-android --no-restore
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-android-ci-build
-          path: MauiSqlite/MauiSqlite/bin/Release/net6.0-android/*Signed.a*
+          path: /MauiSqlite/MauiSqlite/bin/Release/net6.0-android/*Signed.a*
 
 # MAUI Windows Build
   build-windows:
@@ -67,16 +67,16 @@ jobs:
         run: dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore MauiSqlite/MauiSqlite/MauiSqlite.csproj
+        run: dotnet restore /MauiSqlite/MauiSqlite/MauiSqlite.csproj
 
       - name: Build MAUI Windows
-        run: dotnet publish MauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-windows10.0.19041.0 --no-restore
+        run: dotnet publish /MauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-windows10.0.19041.0 --no-restore
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-windows-ci-build
-          path: MauiSqlite/MauiSqlite/bin/Release/net6.0-windows10.0.19041.0/win10-x64/AppPackages/MauiBeach*/MauiBeach*.msix
+          path: /MauiSqlite/MauiSqlite/bin/Release/net6.0-windows10.0.19041.0/win10-x64/AppPackages/MauiBeach*/MauiBeach*.msix
 
 # MAUI iOS Build
   build-ios:
@@ -96,16 +96,16 @@ jobs:
         run: dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore MauiSqlite/MauiSqlite/MauiSqlite.csproj
+        run: dotnet restore /MauiSqlite/MauiSqlite/MauiSqlite.csproj
 
       - name: Build MAUI iOS
-        run: dotnet buildMauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+        run: dotnet build /MauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-ios-ci-build
-          path: MauiSqlite/MauiSqlite/bin/Release/net6.0-ios/iossimulator-x64/**/*.app
+          path: /MauiSqlite/MauiSqlite/bin/Release/net6.0-ios/iossimulator-x64/**/*.app
 
 # MAUI MacCatalyst Build
   build-mac:
@@ -125,13 +125,13 @@ jobs:
         run: dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore MauiSqlite/MauiSqlite/MauiSqlite.csproj
+        run: dotnet restore /MauiSqlite/MauiSqlite/MauiSqlite.csproj
 
       - name: Build MAUI MacCatalyst
-        run: dotnet publish MauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+        run: dotnet publish /MauiSqlite/MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
 
       - name: Upload MacCatalyst Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           name: mauibeach-macos-ci-build
-          path: MauiSqlite/MauiSqlite/bin/Release/net6.0-maccatalyst/maccatalyst-x64/publish/*.pkg
+          path: /MauiSqlite/MauiSqlite/bin/Release/net6.0-maccatalyst/maccatalyst-x64/publish/*.pkg
