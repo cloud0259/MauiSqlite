@@ -49,3 +49,89 @@ jobs:
           name: MauiSqlite-android-ci-build
           path: MauiSqlite/bin/Release/net6.0-android/*Signed.a*
 
+# MAUI Windows Build
+  build-windows:
+    runs-on: windows-2022
+    name: Windows Build
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@c0d4ad69d8bd405d234f1c9166d383b7a4f69ed8
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore MauiSqlite/MauiSqlite.csproj
+
+      - name: Build MAUI Windows
+        run: dotnet publish MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-windows10.0.19041.0 --no-restore
+
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: mauibeach-windows-ci-build
+          path: MauiSqlite/bin/Release/net6.0-windows10.0.19041.0/win10-x64/AppPackages/MauiSqlite*/MauiSqlite*.msix
+
+# MAUI iOS Build
+  build-ios:
+    runs-on: macos-12
+    name: iOS Build
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@c0d4ad69d8bd405d234f1c9166d383b7a4f69ed8
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore MauiSqlite/MauiSqlite.csproj
+
+      - name: Build MAUI iOS
+        run: dotnet build MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: mauibeach-ios-ci-build
+          path: MauiSqlite/bin/Release/net6.0-ios/iossimulator-x64/**/*.app
+
+# MAUI MacCatalyst Build
+  build-mac:
+    runs-on: macos-12
+    name: MacCatalyst Build
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@c0d4ad69d8bd405d234f1c9166d383b7a4f69ed8
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore /MauiSqlite/MauiSqlite.csproj
+
+      - name: Build MAUI MacCatalyst
+        run: dotnet publish MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+
+      - name: Upload MacCatalyst Artifact
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        with:
+          name: mauibeach-macos-ci-build
+          path: MauiSqlite/bin/Release/net6.0-maccatalyst/maccatalyst-x64/publish/*.pkg
