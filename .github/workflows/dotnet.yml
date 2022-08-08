@@ -38,14 +38,14 @@ jobs:
         run: dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore /MauiSqlite/MauiSqlite.csproj
+        run: dotnet restore MauiSqlite/MauiSqlite.csproj
 
       - name: Build MAUI Android
-        run: dotnet publish /MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-android --no-restore
+        run: dotnet publish MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-android --no-restore
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
-          name: mauibeach-android-ci-build
-          path: /MauiSqlite/bin/Release/net6.0-android/*Signed.a*
+          name: MauiSqlite-android-ci-build
+          path: MauiSqlite/bin/Release/net6.0-android/*Signed.a*
 
