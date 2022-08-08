@@ -125,7 +125,7 @@ jobs:
         run: dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore /MauiSqlite/MauiSqlite.csproj
+        run: dotnet restore MauiSqlite/MauiSqlite.csproj
 
       - name: Build MAUI MacCatalyst
         run: dotnet publish MauiSqlite/MauiSqlite.csproj -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
