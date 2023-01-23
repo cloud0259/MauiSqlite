@@ -1,11 +1,14 @@
-﻿namespace MauiSqlite;
+﻿using MauiSqlite.Services;
+
+namespace MauiSqlite;
 
 public partial class App : Application
 {
-	public App()
+	public App(INavigationService navigationService)
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+		MainPage = new NavigationPage();
+		navigationService.NavigateToMainPage();
 	}
 }

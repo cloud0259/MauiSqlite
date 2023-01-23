@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:converter="clr-namespace:MauiSqlite.Converter"
+             x:Class="MauiSqlite.Views.EditBlogPage"
+             xmlns:local="clr-namespace:MauiSqlite.ViewModels"
+             x:DataType="local:EditBlogViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:UpdateBlogConverter x:Key="UpdateBlogConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <StackLayout>
+        <Label Text="FirstName :"/>
+        <Editor x:Name="firstName" Text="{Binding Blog.FirstName}" WidthRequest="100" HorizontalOptions="Start"/>
+        <Label Text="Name :"/>
+        <Editor x:Name="name" Text="{Binding Blog.Name}" WidthRequest="100" HorizontalOptions="Start"/>
+        <Label Text="Description :"/>
+        <Editor x:Name="description" Text="{Binding Blog.Description}" WidthRequest="300" HeightRequest="100" HorizontalOptions="StartAndExpand"/>
+
+        <Button Text="Update blog" Command="{Binding UpdateBlogCommand}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource UpdateBlogConverter}">
+                    <MultiBinding.Bindings>
+                        <Binding Source="{x:Reference firstName}" Path="Text"/>
+                        <Binding Source="{x:Reference name}" Path="Text"/>
+                        <Binding Source="{x:Reference description}" Path="Text"/>
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+    </StackLayout>
+</ContentPage>

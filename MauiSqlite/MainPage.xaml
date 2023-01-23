@@ -48,7 +48,15 @@
                                     </SwipeItems>
 
                                 </SwipeView.RightItems>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Update"
+                                                   BackgroundColor="Green"
+                                                   Command="{Binding Source={x:Reference listBlogs},Path=BindingContext.NavigateToUpdateCommand}" 
+                                                   CommandParameter="{Binding Id}"/>
 
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>

@@ -1,7 +1,9 @@
 ﻿
 using MauiSqlite.Infrastructure;
 using MauiSqlite.Infrastructure.Repository;
+using MauiSqlite.Services;
 using MauiSqlite.ViewModels;
+using MauiSqlite.Views;
 
 namespace MauiSqlite;
 
@@ -24,8 +26,14 @@ public static class MauiProgram
 		});
         builder.Services.AddDbContext<BlogContext>();
 		builder.Services.AddScoped<IBlogRepository, BlogRepository>();
-        builder.Services.AddSingleton<MainPage>();
-        builder.Services.AddSingleton<BlogViewModel>();
+        
+		builder.Services.AddSingleton<INavigationService, NavigationService>();
+
+		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<EditBlogPage>();
+
+        builder.Services.AddScoped<BlogViewModel>();
+		builder.Services.AddScoped<EditBlogViewModel>();
 
         var provider = builder.Services.BuildServiceProvider();
 

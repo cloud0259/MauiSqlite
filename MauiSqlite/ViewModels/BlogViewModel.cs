@@ -3,6 +3,8 @@ using MauiSqlite.Domain.Models;
 using MauiSqlite.Infrastructure;
 using MauiSqlite.Infrastructure.Dtos;
 using MauiSqlite.Infrastructure.Repository;
+using MauiSqlite.Services;
+using MauiSqlite.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,8 +18,8 @@ namespace MauiSqlite.ViewModels
     public class BlogViewModel:BaseViewModel
     {
         private bool _isExisting = false;
-        public BlogDto Blog { get; set; }
         public ObservableCollection<BlogDto> Blogs { get; set; }
+        private readonly INavigationService _navigationService;
 
         public bool IsRefreshing
         {
@@ -33,7 +35,7 @@ namespace MauiSqlite.ViewModels
 
         public ICommand AddBlogCommand => new Command(async (param) =>
         {
-            var blogDto = param as CreateUpdateBlogDto;
+            var blogDto = param as CreateBlogDto;
             await CreateBlog(blogDto);
         });
 
@@ -48,21 +50,22 @@ namespace MauiSqlite.ViewModels
             await DeleteBlogAsync(id);
         });
 
-        public BlogViewModel(IBlogRepository blogRepository)
+        public ICommand NavigateToUpdateCommand => new Command(async (param) =>
+        {
+            await _navigationService.NavigateToOtherPage<EditBlogPage>(param);
+        });
+
+        public BlogViewModel(IBlogRepository blogRepository, INavigationService navigationService)
         {
             _blogRepository = blogRepository;
+            _navigationService = navigationService;
             Blogs = new ObservableCollection<BlogDto>();
         }
 
-        public async Task CreateBlog(CreateUpdateBlogDto input)
+        public async Task CreateBlog(CreateBlogDto input)
         {
             await _blogRepository.CreateBlogAsync(input);
             await GetListBlogAsync();
-        }
-
-        public async Task GetBlogAsync(int id)
-        {
-            Blog = await _blogRepository.GetBlogAsync(id);
         }
 
         public async Task GetListBlogAsync()
@@ -84,11 +87,6 @@ namespace MauiSqlite.ViewModels
         {
             await _blogRepository.DeleteBlogAsync(id);
             await GetListBlogAsync();
-        }
-
-        public async Task UpdateBlogAsync(int id, CreateUpdateBlogDto input)
-        {
-            await _blogRepository.UpdateBlogAsync(id, input);
         }
     }
 }

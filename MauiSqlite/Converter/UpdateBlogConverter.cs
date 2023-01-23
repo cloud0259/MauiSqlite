@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MauiSqlite.Converter
 {
-    public class BlogConverter : IMultiValueConverter
+    public class UpdateBlogConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -16,7 +16,7 @@ namespace MauiSqlite.Converter
                 string firstName = values[0].ToString();
                 string name = values[1].ToString();
                 string description = values[2].ToString();
-                return new CreateBlogDto { Name = name, FirstName = firstName, Description = description };
+                return new UpdateBlogDto { Name = name, FirstName = firstName, Description = description };
             }
             return null;
         }
