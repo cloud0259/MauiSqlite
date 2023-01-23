@@ -11,6 +11,7 @@ namespace MauiSqlite.Infrastructure
     public class BlogContext : DbContext
     {
         public DbSet<Blog>? Blogs { get; set; }
+
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
             SQLitePCL.Batteries_V2.Init();
