@@ -26,4 +26,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\MauiSqlite.Domain\MauiSqlite.Domain.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
+	</ItemGroup>
 </Project>

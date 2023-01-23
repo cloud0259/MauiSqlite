@@ -9,10 +9,10 @@ namespace MauiSqlite.Infrastructure.Repository
 {
     public interface IBlogRepository
     {
-        public Task CreateBlogAsync(CreateUpdateBlogDto input);
+        public Task CreateBlogAsync(CreateBlogDto input);
         public Task<BlogDto> GetBlogAsync(int id);
         public Task<IEnumerable<BlogDto>> GetListBlogAsync();
-        public Task UpdateBlogAsync(int id, CreateUpdateBlogDto input);
+        public Task UpdateBlogAsync(int id, UpdateBlogDto input);
         public Task DeleteBlogAsync(int id);
     }
 }

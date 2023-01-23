@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MauiSqlite.Infrastructure.Dtos
 {
-    public class CreateUpdateBlogDto
+    public class CreateBlogDto
     {
         public string? Name { get; set; }
         public string? FirstName { get; set; }
