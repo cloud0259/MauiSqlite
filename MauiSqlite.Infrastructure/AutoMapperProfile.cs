@@ -13,7 +13,7 @@ namespace MauiSqlite.Infrastructure
     {
         public AutoMapperProfile()
         {
-            CreateMap<CreateUpdateBlogDto, Blog>();
+            CreateMap<CreateBlogDto, Blog>();
             CreateMap<Blog,BlogDto>();
         }
     }

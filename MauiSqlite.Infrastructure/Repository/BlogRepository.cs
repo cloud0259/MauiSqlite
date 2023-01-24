@@ -22,11 +22,18 @@ namespace MauiSqlite.Infrastructure.Repository
             _mapper = mapper;
         }
 
-        public async Task CreateBlogAsync(CreateUpdateBlogDto input)
+        public async Task CreateBlogAsync(CreateBlogDto input)
         {
-            var blog = _mapper.Map<CreateUpdateBlogDto, Blog>(input);
-            await _blogContext.Blogs.AddAsync(blog);
-            await _blogContext.SaveChangesAsync();              
+            try {
+                var blog = _mapper.Map<CreateBlogDto, Blog>(input);
+                blog.Other = "test";
+                await _blogContext.Blogs.AddAsync(blog);
+                await _blogContext.SaveChangesAsync();
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine(ex);        
+            }
         }
 
         public async Task DeleteBlogAsync(int id)
@@ -57,7 +64,7 @@ namespace MauiSqlite.Infrastructure.Repository
             return null;
         }
 
-        public async Task UpdateBlogAsync(int id, CreateUpdateBlogDto input)
+        public async Task UpdateBlogAsync(int id, UpdateBlogDto input)
         {
             var blog = await _blogContext.Blogs.Where(b => b.Id == id).FirstOrDefaultAsync();
             if (blog != null)

@@ -10,13 +10,17 @@ namespace MauiSqlite.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        public virtual Task OnNavigatingTo(object? parameter)
+           => Task.CompletedTask;
+
+        public virtual Task OnNavigatedFrom(bool isForwardNavigation)
+            => Task.CompletedTask;
+
+        public virtual Task OnNavigatedTo()
+            => Task.CompletedTask;
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void RaisePropertyChange([CallerMemberName] string propertyname = null)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
-            }
-        }
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
     }
 }
